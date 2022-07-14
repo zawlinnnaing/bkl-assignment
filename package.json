@@ -1,0 +1,23 @@
+{
+  "name": "backend-assignment",
+  "version": "1.0.0",
+  "description": "Assignment for backend engineer candidates",
+  "scripts": {
+    "codegen": "pnpm codegen:gql && pnpm codegen:prisma",
+    "codegen:gql": "graphql-codegen",
+    "codegen:prisma": "prisma generate",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.8.1",
+    "@graphql-codegen/typescript": "2.7.1",
+    "@graphql-codegen/typescript-resolvers": "2.7.1",
+    "prisma": "4.0.0",
+    "typescript": "4.7.4"
+  },
+  "dependencies": {
+    "@prisma/client": "4.0.0",
+    "apollo-server": "3.10.0",
+    "graphql": "16.5.0"
+  }
+}
