@@ -6,6 +6,8 @@
     "codegen": "pnpm codegen:gql && pnpm codegen:prisma",
     "codegen:gql": "graphql-codegen",
     "codegen:prisma": "prisma generate",
+    "db:migrate": "dotenv -- pnpm prisma migrate dev",
+    "db:reset": "dotenv -- pnpm prisma migrate reset",
     "start": "dotenv -- ts-node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
