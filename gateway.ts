@@ -49,8 +49,11 @@ async function getStitchedSchemas(): Promise<GraphQLSchema> {
   )
 }
 
-export async function createGateway(): Promise<ApolloServer> {
+export async function startGateway(): Promise<void> {
   const schema = await getStitchedSchemas()
 
-  return new ApolloServer({ schema })
+  const server = new ApolloServer({ schema })
+  const { url } = await server.listen(Number(process.env.GATEWAY_PORT))
+
+  console.log(`🚀 Gateway running at ${url}`)
 }
