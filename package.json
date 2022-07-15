@@ -24,8 +24,10 @@
   "dependencies": {
     "@graphql-tools/merge": "8.3.0",
     "@graphql-tools/schema": "8.5.0",
+    "@graphql-tools/stitch": "8.7.0",
     "@graphql-tools/stitching-directives": "2.3.0",
     "@graphql-tools/utils": "8.8.0",
+    "@graphql-tools/wrap": "8.5.0",
     "@prisma/client": "4.0.0",
     "apollo-server": "3.10.0",
     "graphql": "16.5.0"
