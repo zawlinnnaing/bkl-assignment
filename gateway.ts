@@ -1,3 +1,4 @@
+import { fetch } from 'cross-fetch'
 import { stitchSchemas } from '@graphql-tools/stitch'
 import { stitchingDirectives } from '@graphql-tools/stitching-directives'
 import { pruneSchema, filterSchema } from '@graphql-tools/utils'

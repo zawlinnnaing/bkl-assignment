@@ -14,6 +14,7 @@ specifiers:
   '@types/express': 4.17.13
   apollo-server: 3.10.0
   apollo-server-express: 3.10.0
+  cross-fetch: 3.1.5
   dotenv: 16.0.1
   dotenv-cli: 6.0.0
   graphql: 16.5.0
@@ -30,6 +31,7 @@ dependencies:
   '@graphql-tools/wrap': 8.5.0_graphql@16.5.0
   '@prisma/client': 4.0.0_prisma@4.0.0
   apollo-server: 3.10.0_graphql@16.5.0
+  cross-fetch: 3.1.5
   graphql: 16.5.0
 
 devDependencies:
@@ -2127,7 +2129,6 @@ packages:
       node-fetch: 2.6.7
     transitivePeerDependencies:
       - encoding
-    dev: true
 
   /cross-spawn/7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
