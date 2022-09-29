@@ -1,6 +1,21 @@
 # Brikl backend engineer assignment
 
-TBD
+## Introducing the Alpha
+
+Alpha is the new startup company we are developing a cutting edge task management system with modern technology.
+
+You will be getting involved on this! We have setting up user service to manage user in our system but we still missing our core business logic which is the task management.
+
+## Functionality
+
+### Task management
+
+- Create a new list
+- Create a new task in a list (the task should be prepended to the list and the
+  status should indicate it has not been completed)
+- Update a task (title and status)
+- Move a task to a specific position in the list
+- Retrieve all lists and their tasks
 
 ## Getting start
 
