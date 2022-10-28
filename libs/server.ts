@@ -5,6 +5,7 @@ import type { IResolvers } from '@graphql-tools/utils'
 import { ApolloServer, gql } from 'apollo-server'
 import { DocumentNode, GraphQLSchema, print } from 'graphql'
 import { createContext } from './context'
+import { ServiceMetadata } from './types'
 
 export interface CreateGqlServerOptions {
   typeDefs: DocumentNode
@@ -20,6 +21,20 @@ export async function createGqlServer(
     schema,
     context: ctx => createContext(ctx),
   })
+}
+
+export async function startServiceServer({
+  typeDefs,
+  resolvers,
+  port,
+  serviceName,
+}: ServiceMetadata) {
+  const server = await createGqlServer({
+    typeDefs,
+    resolvers,
+  })
+  const { url } = await server.listen(port)
+  console.log(`${serviceName} service is running at port: ${port}`)
 }
 
 function mergeTypeDefsWithDirectives(typeDefs: DocumentNode): DocumentNode {

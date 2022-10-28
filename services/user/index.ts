@@ -1,15 +1,13 @@
-import { ApolloServer } from 'apollo-server'
 import { createGqlServer } from '../../libs/server'
+import { ServiceMetadata } from '../../libs/types'
 import { resolvers } from './resolvers'
 import { typeDefs } from './resolvers/schema'
 
-export async function startServer(): Promise<void> {
-  const server = await createGqlServer({
-    typeDefs,
-    resolvers,
-  })
-
-  const { url } = await server.listen(Number(process.env.USER_SERVICE_PORT))
-
-  console.log(`User service running at ${url}`)
+const metadata: ServiceMetadata = {
+  typeDefs,
+  resolvers,
+  port: Number(process.env.USER_SERVICE_PORT),
+  serviceName: 'User',
 }
+
+export default metadata
