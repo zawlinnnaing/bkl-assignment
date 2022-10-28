@@ -1,9 +1,10 @@
 import { startGateway } from './gateway'
 import { startServiceServer } from './libs/server'
-import UserServiceMetadata from './services/user'
+import userService from './services/user'
+import taskService from './services/task'
 
 async function bootstrap() {
-  await Promise.all([startServiceServer(UserServiceMetadata)])
+  await Promise.all([userService, taskService].map(startServiceServer))
 
   await startGateway()
 }
