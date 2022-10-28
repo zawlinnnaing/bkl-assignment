@@ -12,3 +12,22 @@ model User {
   username String
   password String
 }
+
+model Task {
+  id      String     @id @default(uuid())
+  status  TaskStatus
+  title   String
+  list_id String
+  list    Tasklist   @relation(fields: [list_id], references: [id])
+}
+
+model Tasklist {
+  id       String @id @default(uuid())
+  title    String
+  tasks Task[]
+}
+
+enum TaskStatus {
+  Active
+  Completed
+}
