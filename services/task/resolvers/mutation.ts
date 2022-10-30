@@ -14,4 +14,7 @@ export const mutation: Resolvers<Context>['Mutation'] = {
     }
     return updatedTask
   },
+  moveTask: async (parent, args) => {
+    return repository.moveTask(args.id, args.list_id, args.position)
+  },
 }

@@ -4,17 +4,17 @@ import {
   UpdateTaskInput,
 } from '../../generated/types'
 import { prismaMock } from '../../test/singleton'
-import { createTask, updateTask } from './repository'
+import { createTask, moveTask, updateTask } from './repository'
 
+const mockTask: Task = {
+  id: '1',
+  position: 0,
+  title: 'test task',
+  list_id: '1',
+  status: TaskStatus.Active,
+}
 describe(createTask, () => {
   it('returns created task, given that input is valid', async () => {
-    const mockTask: Task = {
-      id: '1',
-      position: 0,
-      title: 'test task',
-      list_id: '1',
-      status: TaskStatus.Active,
-    }
     prismaMock.task.create.mockResolvedValue(mockTask)
 
     const createdTask = await createTask({
@@ -64,6 +64,37 @@ describe(updateTask, () => {
         id: '1',
       },
       data: updatePayload,
+    })
+  })
+})
+
+describe(moveTask, () => {
+  it('calls update task and find task, given that task is moved', async () => {
+    prismaMock.task.findUniqueOrThrow.mockResolvedValue(mockTask)
+    await moveTask(mockTask.id, '2', 2)
+    expect(prismaMock.task.updateMany).toBeCalledTimes(2)
+    expect(prismaMock.task.updateMany.mock.calls).toEqual([
+      [
+        {
+          where: { list_id: '1', position: { gt: 0 } },
+          data: { position: { decrement: 1 } },
+        },
+      ],
+      [
+        {
+          where: { list_id: '2', position: { gte: 2 } },
+          data: { position: { increment: 1 } },
+        },
+      ],
+    ])
+    expect(prismaMock.task.update).toBeCalledWith({
+      where: {
+        id: mockTask.id,
+      },
+      data: {
+        list_id: '2',
+        position: 2,
+      },
     })
   })
 })
