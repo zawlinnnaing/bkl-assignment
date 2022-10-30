@@ -31,6 +31,7 @@ describe(createTask, () => {
     })
     expect(prismaMock.task.updateMany).toBeCalledWith({
       where: {
+        list_id: mockTask.list_id,
         position: {
           gte: 0,
         },
