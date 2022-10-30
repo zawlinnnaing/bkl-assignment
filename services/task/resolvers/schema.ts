@@ -1,10 +1,14 @@
 import { gql } from 'apollo-server'
 
-export const schema = gql`
+export const TaskGqlType = gql`
   type Task {
     id: ID!
     title: String!
   }
+`
+
+export const schema = gql`
+  ${TaskGqlType}
 
   type Query {
     Task: [Task!]!
