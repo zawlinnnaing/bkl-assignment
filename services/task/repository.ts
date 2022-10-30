@@ -1,5 +1,11 @@
-import { CreateTaskInput, TaskStatus } from '../../generated/types'
+import { Task } from '@prisma/client'
+import {
+  CreateTaskInput,
+  TaskStatus,
+  UpdateTaskInput,
+} from '../../generated/types'
 import { prismaClient } from '../../prisma'
+import { gqlStatusToPrismaStatus } from './utils'
 
 export async function createTask(task: CreateTaskInput) {
   if (!task.title.trim()) {
@@ -31,3 +37,20 @@ export async function createTask(task: CreateTaskInput) {
   ])
   return createdTask
 }
+
+export async function updateTask(
+  id: string,
+  task: UpdateTaskInput
+): Promise<Task | null> {
+  return prismaClient.task.update({
+    where: {
+      id,
+    },
+    data: {
+      ...(task.title && { title: task.title }),
+      ...(task.status && { status: gqlStatusToPrismaStatus(task.status) }),
+    },
+  })
+}
+
+export async function moveTask(id: string, listId: string, position: number) {}

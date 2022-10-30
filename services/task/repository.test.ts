@@ -1,6 +1,10 @@
 import { Task, TaskStatus } from '@prisma/client'
+import {
+  TaskStatus as GqlTaskStatus,
+  UpdateTaskInput,
+} from '../../generated/types'
 import { prismaMock } from '../../test/singleton'
-import { createTask } from './repository'
+import { createTask, updateTask } from './repository'
 
 describe(createTask, () => {
   it('returns created task, given that input is valid', async () => {
@@ -46,5 +50,20 @@ describe(createTask, () => {
         list_id: '1',
       })
     ).rejects.toThrow()
+  })
+})
+
+describe(updateTask, () => {
+  it('calls prisma client update task, given that request is valid', async () => {
+    const updatePayload: UpdateTaskInput = {
+      status: GqlTaskStatus.Completed,
+    }
+    await updateTask('1', updatePayload)
+    expect(prismaMock.task.update).toHaveBeenCalledWith({
+      where: {
+        id: '1',
+      },
+      data: updatePayload,
+    })
   })
 })

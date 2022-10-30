@@ -7,4 +7,11 @@ export const mutation: Resolvers<Context>['Mutation'] = {
   createTask: async (parent, args) => {
     return repository.createTask(args.input)
   },
+  updateTask: async (parent, args) => {
+    const updatedTask = await repository.updateTask(args.id, args.input)
+    if (!updatedTask) {
+      throw new Error(`Task not found for id: ${args.id}`)
+    }
+    return updatedTask
+  },
 }
