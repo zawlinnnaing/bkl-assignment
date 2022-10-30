@@ -18,5 +18,7 @@ jobs:
           run_install: false
       - name: Install deps
         run: pnpm install
+      - name: Generate code
+        run: pnpm run codegen
       - name: Run test
         run: pnpm run test:ci
