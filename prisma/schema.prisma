@@ -14,19 +14,19 @@ model User {
 }
 
 model Task {
-  id      String     @id @default(uuid())
-  status  TaskStatus
-  title   String
-  list_id String
-  list    Tasklist   @relation(fields: [list_id], references: [id])
+  id       String     @id @default(uuid())
+  status   TaskStatus @default(Active)
+  title    String
+  list_id  String
+  list     Tasklist   @relation(fields: [list_id], references: [id])
   position Int
 
   @@unique([list_id, position])
 }
 
 model Tasklist {
-  id       String @id @default(uuid())
-  title    String
+  id    String @id @default(uuid())
+  title String
   tasks Task[]
 }
 

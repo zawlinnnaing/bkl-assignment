@@ -12,6 +12,7 @@ export const schema = gql`
 
   type Query {
     tasklists: [Tasklist!]!
+    tasklist(id: ID!): Tasklist!
   }
 
   type Mutation {

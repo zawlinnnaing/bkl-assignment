@@ -34,7 +34,7 @@ export async function startServiceServer({
     resolvers,
   })
   const { url } = await server.listen(port)
-  console.log(`${serviceName} service is running at port: ${port}`)
+  console.log(`${serviceName} service is running at ${url}`)
 }
 
 function mergeTypeDefsWithDirectives(typeDefs: DocumentNode): DocumentNode {
