@@ -64,21 +64,7 @@ export async function moveTask(
       id,
     },
   })
-  const [, , updatedTask] = await prismaClient.$transaction([
-    // Remove task from old position
-    prismaClient.task.updateMany({
-      where: {
-        list_id: task.list_id,
-        position: {
-          gt: task.position,
-        },
-      },
-      data: {
-        position: {
-          decrement: 1,
-        },
-      },
-    }),
+  const [, updatedTask] = await prismaClient.$transaction([
     prismaClient.task.updateMany({
       where: {
         list_id: newListId,
@@ -99,6 +85,20 @@ export async function moveTask(
       data: {
         list_id: newListId,
         position: newPosition,
+      },
+    }),
+    // Remove task from old position
+    prismaClient.task.updateMany({
+      where: {
+        list_id: task.list_id,
+        position: {
+          gt: task.position,
+        },
+      },
+      data: {
+        position: {
+          decrement: 1,
+        },
       },
     }),
   ])

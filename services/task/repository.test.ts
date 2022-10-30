@@ -77,14 +77,14 @@ describe(moveTask, () => {
     expect(prismaMock.task.updateMany.mock.calls).toEqual([
       [
         {
-          where: { list_id: '1', position: { gt: 0 } },
-          data: { position: { decrement: 1 } },
+          where: { list_id: '2', position: { gte: 2 } },
+          data: { position: { increment: 1 } },
         },
       ],
       [
         {
-          where: { list_id: '2', position: { gte: 2 } },
-          data: { position: { increment: 1 } },
+          where: { list_id: '1', position: { gt: 0 } },
+          data: { position: { decrement: 1 } },
         },
       ],
     ])
