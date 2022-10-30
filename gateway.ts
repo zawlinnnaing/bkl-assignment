@@ -19,16 +19,19 @@ function createRemoteExecutor(uri: string) {
 }
 
 async function createSubSchemas() {
-  const userExecutor = createRemoteExecutor(
-    `http://localhost:${process.env.USER_SERVICE_PORT}`
-  )
+  const subSchemas = [
+    process.env.USER_SERVICE_PORT,
+    process.env.TASK_SERVICE_PORT,
+    process.env.TASKLIST_SERVICE_PORT,
+  ]
+    .map(port => `http://localhost:${port}`)
+    .map(url => createRemoteExecutor(url))
+    .map(async executor => ({
+      schema: await introspectSchema(executor),
+      executor,
+    }))
 
-  return Promise.all([
-    {
-      schema: await introspectSchema(userExecutor),
-      executor: userExecutor,
-    },
-  ])
+  return Promise.all(subSchemas)
 }
 
 async function getStitchedSchemas(): Promise<GraphQLSchema> {
