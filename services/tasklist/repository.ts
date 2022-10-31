@@ -26,3 +26,11 @@ export async function getTasklistById(id: string) {
     },
   })
 }
+
+export async function getTasklists() {
+  return prismaClient.tasklist.findMany({
+    include: {
+      tasks: true,
+    },
+  })
+}
