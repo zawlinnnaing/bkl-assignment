@@ -58,12 +58,15 @@ export async function moveTask(
   id: string,
   newListId: string,
   newPosition: number
-) {
+): Promise<Task> {
   const task = await prismaClient.task.findUniqueOrThrow({
     where: {
       id,
     },
   })
+  if (task.list_id === newListId && task.position === newPosition) {
+    return task
+  }
   const [, updatedTask] = await prismaClient.$transaction([
     prismaClient.task.updateMany({
       where: {
@@ -92,7 +95,7 @@ export async function moveTask(
       where: {
         list_id: task.list_id,
         position: {
-          gt: task.position,
+          gte: task.position,
         },
       },
       data: {

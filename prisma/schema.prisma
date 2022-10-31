@@ -20,8 +20,6 @@ model Task {
   list_id  String
   list     Tasklist   @relation(fields: [list_id], references: [id])
   position Int
-
-  @@unique([list_id, position])
 }
 
 model Tasklist {
