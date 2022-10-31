@@ -15,12 +15,18 @@ You will be getting involved on this! We have setting up user service to manage 
   status should indicate it has not been completed) (mutation: `createTask`)
 - Update a task (title and status) (mutation: `updateTask`)
 - Move a task to a specific position in the list (mutation: `moveTask`)
-- Retrieve all lists and their tasks
+- Retrieve all lists and their tasks (query: `tasklists`)
 
 ## Getting start
 
-- [Prerequisites](#prerequisites)
-- [Setup](#setup)
+- [Brikl backend engineer assignment](#brikl-backend-engineer-assignment)
+  - [Introducing the Alpha](#introducing-the-alpha)
+  - [Functionality](#functionality)
+    - [Task management](#task-management)
+  - [Getting start](#getting-start)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
+    - [Test](#test)
 
 ### Prerequisites
 
@@ -44,11 +50,15 @@ This is the instruction to setup this project and run in your local machine. Not
 8. To browse existing database using [prisma studio](https://www.prisma.io/studio), run `pnpm run db:studio`
 
 ### Test
+
 To run unit tests, you can run:
+
 ```
 pnpm run test
 ```
+
 or to run tests when code changes in development, run
+
 ```
 pnpm run test:watch
 ```
