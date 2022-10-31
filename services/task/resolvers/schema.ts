@@ -37,6 +37,11 @@ export const schema = gql`
   type Mutation {
     createTask(input: CreateTaskInput!): Task!
     updateTask(id: ID!, input: UpdateTaskInput!): Task!
+    """
+      id: task id to move
+      list_id: destination tasklist id
+      position: new position in the destination tasklist id
+    """
     moveTask(id: ID!, list_id: String!, position: Int!): Task!
   }
 `

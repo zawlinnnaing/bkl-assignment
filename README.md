@@ -10,11 +10,11 @@ You will be getting involved on this! We have setting up user service to manage 
 
 ### Task management
 
-- Create a new list
+- Create a new list, (mutation: `createTasklist`)
 - Create a new task in a list (the task should be prepended to the list and the
-  status should indicate it has not been completed)
-- Update a task (title and status)
-- Move a task to a specific position in the list
+  status should indicate it has not been completed) (mutation: `createTask`)
+- Update a task (title and status) (mutation: `updateTask`)
+- Move a task to a specific position in the list (mutation: `moveTask`)
 - Retrieve all lists and their tasks
 
 ## Getting start
@@ -39,5 +39,16 @@ This is the instruction to setup this project and run in your local machine. Not
 3. Run `docker compose up -d` to start docker containers in background.
 4. Run `pnpm db:migrate` to initiate database.
 5. Run `pnpm codegen` to generate TypeScript definition for GraphQL and Prisma client.
-6. Run `pnpm start` to start the project.
-7. Go to `http://localhost:4000`, you should see Apollo Playground with two queries `users` and `user`. You may change the port according to `GATEWAY_PORT` in your `.env` file.
+6. Run `pnpm start` to start the project. (or) Run `pnpm run start:dev` to server that watches code changes.
+7. Go to `http://localhost:4000`, you should see Apollo Playground. You may change the port according to `GATEWAY_PORT` in your `.env` file.
+8. To browse existing database using [prisma studio](https://www.prisma.io/studio), run `pnpm run db:studio`
+
+### Test
+To run unit tests, you can run:
+```
+pnpm run test
+```
+or to run tests when code changes in development, run
+```
+pnpm run test:watch
+```
