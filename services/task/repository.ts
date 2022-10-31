@@ -104,3 +104,15 @@ export async function moveTask(
   ])
   return updatedTask
 }
+
+export async function getTasks() {
+  return prismaClient.task.findMany()
+}
+
+export async function getTaskById(id: string) {
+  return prismaClient.task.findUniqueOrThrow({
+    where: {
+      id,
+    },
+  })
+}

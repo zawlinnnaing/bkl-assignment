@@ -19,7 +19,8 @@ export const schema = gql`
   }
 
   type Query {
-    Task: [Task!]!
+    tasks: [Task!]!
+    task(id: ID!): Task!
   }
 
   input CreateTaskInput {

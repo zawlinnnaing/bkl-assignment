@@ -4,7 +4,13 @@ import {
   UpdateTaskInput,
 } from '../../generated/types'
 import { prismaMock } from '../../test/singleton'
-import { createTask, moveTask, updateTask } from './repository'
+import {
+  createTask,
+  getTaskById,
+  getTasks,
+  moveTask,
+  updateTask,
+} from './repository'
 
 const mockTask: Task = {
   id: '1',
@@ -97,5 +103,32 @@ describe(moveTask, () => {
         position: 2,
       },
     })
+  })
+})
+
+describe(getTasks, () => {
+  it('returns tasks, given that there is task in data store', async () => {
+    prismaMock.task.findMany.mockResolvedValue([mockTask])
+    const tasks = await getTasks()
+    expect(tasks).toEqual([mockTask])
+  })
+
+  it('returns empty array, given that there is no task in data store', async () => {
+    prismaMock.task.findMany.mockResolvedValue([])
+    const tasks = await getTasks()
+    expect(tasks).toEqual([])
+  })
+})
+
+describe(getTaskById, () => {
+  it('returns task, given that there is task in data store', async () => {
+    prismaMock.task.findUniqueOrThrow.mockResolvedValue(mockTask)
+    const task = await getTaskById(mockTask.id)
+    expect(prismaMock.task.findUniqueOrThrow).toBeCalledWith({
+      where: {
+        id: mockTask.id,
+      },
+    })
+    expect(task).toEqual(mockTask)
   })
 })
