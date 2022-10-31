@@ -89,7 +89,7 @@ describe(moveTask, () => {
       ],
       [
         {
-          where: { list_id: '1', position: { gt: 0 } },
+          where: { list_id: '1', position: { gte: 0 } },
           data: { position: { decrement: 1 } },
         },
       ],
